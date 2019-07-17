@@ -11,7 +11,17 @@ const client = new btcpay.BTCPayClient('https://btcpay.okayrelay.com', keypair, 
 
 /* get & verify invoice. */
 router.get('/:id', async function(req, res, next) {
-
+    // Check if invoice is paid
+    const invoiceId = req.params.id
+    client.get_invoice(invoiceId)
+    .then(invoice => {
+        if(invoice == 'complete' || invoice.status == 'paid') {
+            // Deliver ride to customer
+            res.end('<html>Thank you!</html>')
+        } else {
+            res.end('<html>Not paid!</html')
+        }
+    })
 })
 
 /* Create invoice. */
