@@ -1,0 +1,11 @@
+h1=message
+p Litrides is a Bitcoin Lightning powered ride haling platform
+div 
+    h2 Submit payments
+    form(method='post', action='/invoice')
+        p
+            label Amount
+            input(type='number', name='amount')
+        p
+            input(type='submit', name='submit')
+    
